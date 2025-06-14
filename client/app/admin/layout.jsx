@@ -1,4 +1,6 @@
-import Sidebar from '@/components/admin/Sidebar';
+// client/app/admin/layout.jsx
+
+import Sidebar from '@/components/admin/Sidebar'; // Path ini sekarang akan berfungsi karena jsconfig.json
 
 export default function AdminLayout({ children }) {
   return (

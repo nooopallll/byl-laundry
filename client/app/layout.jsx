@@ -1,6 +1,6 @@
 // client/app/layout.jsx
 
-import "./globals.css"; // <-- LANGKAH KRITIS #1: Impor file CSS global
+import "./globals.css"; // <-- HAPUS TANDA KOMENTAR DI SINI
 
 export const metadata = {
   title: "ByL Laundry",
@@ -10,7 +10,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>{children}</body> {/* <-- LANGKAH KRITIS #2: Halaman dirender di dalam body */}
+      <body>{children}</body>
     </html>
   );
 }
