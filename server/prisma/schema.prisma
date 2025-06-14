@@ -1,0 +1,61 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  username  String   @unique
+  password  String
+  role      Role     @default(CUSTOMER)
+  orders    Order[]
+  attendances Attendance[]
+  createdAt DateTime @default(now())
+}
+
+model Order {
+  id           String      @id @default(cuid())
+  orderCode    String      @unique @default(cuid())
+  customer     User        @relation(fields: [customerId], references: [id])
+  customerId   String
+  serviceType  String
+  serviceLevel ServiceLevel
+  weightInKg   Float
+  totalPrice   Float
+  notes        String?
+  status       OrderStatus @default(ANTREAN)
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+}
+
+model Attendance {
+  id         String    @id @default(cuid())
+  employee   User      @relation(fields: [employeeId], references: [id])
+  employeeId String
+  checkIn    DateTime  @default(now())
+  checkOut   DateTime?
+  location   String?
+}
+
+enum Role {
+  CUSTOMER
+  ADMIN
+}
+
+enum ServiceLevel {
+  REGULER
+  EKSPRESS
+  SATUAN
+}
+
+enum OrderStatus {
+  ANTREAN
+  PROSES
+  SELESAI
+  DIANTAR
+}
